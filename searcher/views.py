@@ -10,5 +10,17 @@ def index(request):
     return render(request, "base.html", {"theses": theses})
 
 
-# def thesis_list(request):
-# return render(request, "searcher/theses.html", {"theses": theses})
+def thesis_detail(request, id):
+    thesis = Thesis.objects.get(pk=id)
+    authors = thesis.authors.all()
+    panelists = thesis.panelists.all()
+    keywords = thesis.keywords.all()
+
+    context = {
+        "thesis": thesis,
+        "authors": authors,
+        "panelists": panelists,
+        "keywords": keywords,
+    }
+
+    return render(request, "detail.html", context)
