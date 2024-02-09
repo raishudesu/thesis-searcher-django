@@ -24,6 +24,14 @@ class Keyword(models.Model):
         return self.name
 
 
+class Adviser(models.Model):
+    first_name = models.CharField(max_length=40)
+    last_name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+
 class Thesis(models.Model):
     class Status(models.TextChoices):
         REJECTED = "RJ", "Rejected"
@@ -54,7 +62,7 @@ class Thesis(models.Model):
 
     department = models.CharField(max_length=250)
 
-    adviser = models.CharField(max_length=250)
+    adviser = models.ForeignKey(Adviser, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.title
