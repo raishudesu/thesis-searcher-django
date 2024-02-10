@@ -1,31 +1,100 @@
-<h1>{{thesis.title}}</h1>
-<p><strong>Status: </strong>{{thesis.get_status_display}}</p>
-<h3>Institution</h3>
-<p>{{thesis.institution}}</p>
-<h3>Department</h3>
-<p>{{thesis.department}}</p>
-<p>Defense date: {{thesis.defense_date}}</p>
-<p>Published date: {{thesis.published_date}}</p>
-<h3>Keywords</h3>
-<ul>
-  {% for keyword in keywords %}
-  <li>{{keyword.name}}</li>
-  {% endfor %}
-</ul>
-<h3>Adviser</h3>
-<p>{{thesis.adviser}}</p>
-<h3>Authors</h3>
-<ul>
-  {% for author in authors%}
-  <li>{{author.name}}</li>
-  {% endfor %}
-</ul>
-<h3>Abstract</h3>
-<p>{{thesis.abstract}}</p>
-<h3>Panelists</h3>
-<ul>
-  {% for panelist in panelists %}
-  <li>{{panelist.name}}</li>
-  {% endfor %}
-</ul>
-<a href="{{thesis.paper_link}}">Link to paper</a>
+<style>
+  main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+  }
+  h3 {
+    margin-top: 2rem;
+  }
+  .hero {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 2rem;
+    height: 25rem;
+    width: 100%;
+    max-width: 50%;
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    border-radius: 2rem;
+  }
+
+  .abstract {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 50%;
+  }
+  .hero-top {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-bottom {
+    display: flex;
+    gap: 2rem;
+  }
+  .authors,
+  .keywords,
+  .panelists {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+  }
+  .institution {
+    display: flex;
+    gap: 1rem;
+  }
+</style>
+
+<section class="hero">
+  <div class="hero-top">
+    <h2>{{thesis.title}}</h2>
+    <small>Published date: {{thesis.published_date}}</small>
+    <small>Defense date: {{thesis.defense_date}}</small>
+    <small><strong>Status: </strong>{{thesis.get_status_display}}</small>
+    <small><strong>Adviser:</strong> {{thesis.adviser}}</small>
+  </div>
+  <div class="hero-bottom">
+    <div class="authors-container">
+      <small><strong>Authors</strong></small>
+      <ul class="authors">
+        {% for author in authors%}
+        <li><small>{{author.name}}</small></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="keywords-container">
+      <small><strong>Keywords</strong></small>
+      <ul class="keywords">
+        {% for keyword in keywords%}
+        <li><small>{{keyword.name}}</small></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="panelists-container">
+      <small><strong>Panelists</strong></small>
+      <ul class="panelists">
+        {% for panelist in panelists %}
+        <li><small>{{panelist.name}}</small></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="hero-footer">
+    <div class="institution">
+      <small><strong>Institution & Department:</strong></small>
+      <small style="text-transform: uppercase"
+        >{{thesis.institution}}-{{thesis.department}}</small
+      >
+    </div>
+  </div>
+</section>
+
+<section class="abstract">
+  <h3>Abstract</h3>
+  <p>{{thesis.abstract}}</p>
+
+  <a href="{{thesis.paper_link}}">Link to paper</a>
+</section>

@@ -5,12 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{%static 'searcher/styles.css'%}" />
-    <title>Document</title>
+    <title>Thesis Searcher</title>
   </head>
   <body>
     {%include "components/header.html"%}
     <main>
-      <h3>Available theses</h3>
+      <h3>Showing {{theses|length}} theses</h3>
       {%include "searcher/theses.html"%}
     </main>
   </body>

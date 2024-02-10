@@ -7,7 +7,9 @@ from .models import Thesis
 
 def index(request):
     theses = Thesis.objects.all()
-    return render(request, "base.html", {"theses": theses})
+
+    context = {"theses": theses}
+    return render(request, "base.html", context)
 
 
 def thesis_detail(request, id):
