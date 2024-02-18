@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.urls import reverse
 
 # Create your models here.
 
@@ -40,6 +42,8 @@ class Thesis(models.Model):
 
     title = models.CharField(max_length=250)
 
+    slug = models.SlugField(max_length=250, unique_for_date="published_date")
+
     authors = models.ManyToManyField(Author)
 
     panelists = models.ManyToManyField(Panelist)
@@ -52,9 +56,9 @@ class Thesis(models.Model):
         max_length=3, choices=Status.choices, default=Status.UNDER_REVIEW
     )
 
-    defense_date = models.DateTimeField()
+    published_date = models.DateTimeField(default=timezone.now)
 
-    published_date = models.DateTimeField()
+    defense_date = models.DateTimeField()
 
     paper_link = models.CharField(max_length=250)
 
@@ -63,6 +67,21 @@ class Thesis(models.Model):
     department = models.CharField(max_length=250)
 
     adviser = models.ForeignKey(Adviser, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        ordering = ["-published_date"]
+        indexes = [models.Index(fields=["-published_date"])]
+
+    def get_absolute_url(self):
+        return reverse(
+            "thesis:thesis_detail",
+            args=[
+                self.published_date.year,
+                self.published_date.month,
+                self.published_date.day,
+                self.slug
+            ],
+        )
 
     def __str__(self):
         return self.title

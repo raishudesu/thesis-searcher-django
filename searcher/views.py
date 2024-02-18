@@ -5,16 +5,23 @@ from .models import Thesis
 # Create your views here.
 
 
-def index(request):
+def thesis_list(request):
     theses = Thesis.objects.all()
 
     context = {"theses": theses}
     return render(request, "searcher/thesis/list.html", context)
 
 
-def thesis_detail(request, id):
-    # thesis = Thesis.objects.get(pk=id)
-    thesis = get_object_or_404(Thesis, pk=id)
+def thesis_detail(request, year, month, day, post):
+    thesis = get_object_or_404(
+        Thesis,
+        status=Thesis.Status.PUBLISHED,
+        slug=post,
+        published_date__year=year,
+        published_date__month=month,
+        published_date__day=day,
+    )
+
     authors = thesis.authors.all()
     panelists = thesis.panelists.all()
     keywords = thesis.keywords.all()

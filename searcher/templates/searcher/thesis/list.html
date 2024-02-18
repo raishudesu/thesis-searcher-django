@@ -8,7 +8,7 @@
 <ul class="theses-list">
   {%for thesis in theses%}
   <li>
-    <a href="{% url 'thesis_detail' thesis.id%}">{{thesis.title}}</a>
+    <a href="{{thesis.get_absolute_url}}">{{thesis.title}}</a>
     <small>{{thesis.get_status_display}}</small>
     <small>{{thesis.published_date}}</small>
   </li>

@@ -17,6 +17,7 @@ class ThesisAdmin(admin.ModelAdmin):
     ]
     list_filter = ["published_date", "defense_date", "status"]
     search_fields = ["title"]
+    prepopulated_fields = {"slug": ("title",)}
 
 
 admin.site.register([Author, Keyword, Panelist, Adviser])
