@@ -1,0 +1,17 @@
+{% extends 'searcher/base.html' %}
+<!--  -->
+{% block title %} Thesis Searcher {% endblock title %}
+
+<!--  -->
+{% block content %}
+<h3>Showing {{theses|length}} theses</h3>
+<ul class="theses-list">
+  {%for thesis in theses%}
+  <li>
+    <a href="{% url 'thesis_detail' thesis.id%}">{{thesis.title}}</a>
+    <small>{{thesis.get_status_display}}</small>
+    <small>{{thesis.published_date}}</small>
+  </li>
+  {%endfor%}
+</ul>
+{% endblock %}

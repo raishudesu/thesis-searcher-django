@@ -1,52 +1,8 @@
-<style>
-  main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 2rem;
-  }
-  h3 {
-    margin-top: 2rem;
-  }
-  .hero {
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 2rem;
-    height: 25rem;
-    width: 100%;
-    max-width: 50%;
-    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-    border-radius: 2rem;
-  }
+{% extends 'searcher/base.html' %}
 
-  .abstract {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 50%;
-  }
-  .hero-top {
-    display: flex;
-    flex-direction: column;
-  }
-  .hero-bottom {
-    display: flex;
-    gap: 2rem;
-  }
-  .authors,
-  .keywords,
-  .panelists {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-  }
-  .institution {
-    display: flex;
-    gap: 1rem;
-  }
-</style>
+<!--  -->
+
+{% block content %}
 
 <section class="hero">
   <div class="hero-top">
@@ -98,3 +54,5 @@
 
   <a href="{{thesis.paper_link}}">Link to paper</a>
 </section>
+
+{% endblock content %}
