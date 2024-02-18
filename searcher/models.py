@@ -33,6 +33,11 @@ class Adviser(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Thesis.Status.PUBLISHED)
+
+
 
 class Thesis(models.Model):
     class Status(models.TextChoices):
@@ -67,6 +72,9 @@ class Thesis(models.Model):
     department = models.CharField(max_length=250)
 
     adviser = models.ForeignKey(Adviser, on_delete=models.DO_NOTHING)
+
+    objects = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ["-published_date"]

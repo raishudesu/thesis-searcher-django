@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Thesis
+from django.core.paginator import Paginator
+
 
 # Create your views here.
 
 
 def thesis_list(request):
-    theses = Thesis.objects.all()
+    theses = Thesis.published.all()
+    paginator = Paginator(theses, 3)
+    page_number = request.GET.get("page", 1)
+    theses = paginator.page(page_number)
 
     context = {"theses": theses}
     return render(request, "searcher/thesis/list.html", context)
