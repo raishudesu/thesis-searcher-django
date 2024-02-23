@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Thesis
 from django.core.paginator import Paginator
-
-
+from django.views.decorators.http import require_POST
+from .forms import CommentForm
 # Create your views here.
 
 
@@ -30,12 +30,31 @@ def thesis_detail(request, year, month, day, post):
     authors = thesis.authors.all()
     panelists = thesis.panelists.all()
     keywords = thesis.keywords.all()
-
+    
+    comments = thesis.comments.filter(active=True)
+    form = CommentForm()
     context = {
         "thesis": thesis,
         "authors": authors,
         "panelists": panelists,
         "keywords": keywords,
+        "form": form,
+        "comments": comments
     }
 
     return render(request, "searcher/thesis/detail.html", context)
+
+@require_POST
+def thesis_comment(request, thesis_id):
+    print(thesis_id)
+    thesis = get_object_or_404(Thesis, id=thesis_id, status=Thesis.Status.PUBLISHED)
+    comment = None
+    form = CommentForm(data=request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.thesis = thesis
+        comment.save()
+    return render(request, "searcher/thesis/comment.html",
+                        {'thesis':thesis,
+                         'form': form, 
+                         'comment': comment})
