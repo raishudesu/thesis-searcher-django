@@ -13,6 +13,25 @@ main {
 h3 {
   margin-top: 2rem;
 }
+
+.hero-landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-landing h1 {
+  font-size: 4rem;
+}
+
+.get-started {
+  text-decoration: none;
+  background-color: yellow;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 1px solid yellowgreen;
+  border-radius: 2rem;
+}
+
 .theses-list {
   padding: 1rem;
   border-radius: 2rem;

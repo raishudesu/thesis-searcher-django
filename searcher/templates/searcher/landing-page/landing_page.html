@@ -1,0 +1,16 @@
+{% extends 'searcher/base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block title %} Home {% endblock title %}
+
+<!--  -->
+{% block content %}
+<section>
+  <div class="hero-landing">
+    <h1>Welcome to Thesis Searcher!</h1>
+    <img src="{%static 'images/hero-image.png'%}" alt="hero-image" />
+  </div>
+  <a href="/searcher" type="button" class="get-started">Get started</a>
+</section>
+{% endblock content %}

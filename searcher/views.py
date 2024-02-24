@@ -7,6 +7,10 @@ from .forms import CommentForm, SearchForm
 # Create your views here.
 
 
+def landing_page(request):
+
+    return render(request, "searcher/landing-page/landing_page.html")
+
 def thesis_list(request):
     theses = Thesis.published.all()
     paginator = Paginator(theses, 3)
