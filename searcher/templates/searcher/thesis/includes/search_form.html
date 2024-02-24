@@ -1,0 +1,11 @@
+<h2>Search thesis</h2>
+<form
+  action="{% url 'thesis:search_theses'%}"
+  method="post"
+  style="display: flex; flex-direction: column"
+>
+  {{form}} {%csrf_token%}
+  <p>
+    <input type="submit" value="Search thesis" />
+  </p>
+</form>

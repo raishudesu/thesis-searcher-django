@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Thesis
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
-from .forms import CommentForm
+from .forms import CommentForm, SearchForm
 # Create your views here.
 
 
@@ -12,8 +12,8 @@ def thesis_list(request):
     paginator = Paginator(theses, 3)
     page_number = request.GET.get("page", 1)
     theses = paginator.page(page_number)
-
-    context = {"theses": theses}
+    form = SearchForm()
+    context = {"theses": theses, "form" : form}
     return render(request, "searcher/thesis/list.html", context)
 
 
@@ -46,7 +46,6 @@ def thesis_detail(request, year, month, day, post):
 
 @require_POST
 def thesis_comment(request, thesis_id):
-    print(thesis_id)
     thesis = get_object_or_404(Thesis, id=thesis_id, status=Thesis.Status.PUBLISHED)
     comment = None
     form = CommentForm(data=request.POST)
@@ -54,7 +53,23 @@ def thesis_comment(request, thesis_id):
         comment = form.save(commit=False)
         comment.thesis = thesis
         comment.save()
+
     return render(request, "searcher/thesis/comment.html",
                         {'thesis':thesis,
                          'form': form, 
                          'comment': comment})
+
+@require_POST
+def search_theses(request):
+    form = SearchForm(data=request.POST)
+    theses = None
+
+    if form.is_valid():
+        keywords = form.data.get("abstract")
+        theses = Thesis.objects.filter(abstract__contains=keywords)
+
+    context = {
+        "theses" : theses,
+        "form": form
+    }
+    return render(request, "searcher/thesis/search.html", context)

@@ -10,7 +10,7 @@ urlpatterns = [
         views.thesis_detail,
         name="thesis_detail",
     ),
-        path('<int:thesis_id>/comment/',
+    path('<int:thesis_id>/comment/',
         views.thesis_comment, name='thesis_comment'),
-
+    path("search", views.search_theses, name="search_theses")
 ]
