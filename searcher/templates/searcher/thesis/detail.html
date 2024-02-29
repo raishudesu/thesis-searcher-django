@@ -29,6 +29,14 @@
         {% endfor %}
       </ul>
     </div>
+    <div class="tags-container">
+      <small><strong>Tags</strong></small>
+      <ul class="tags">
+        {% for tag in tags%}
+        <li><small>{{tag.name}}</small></li>
+        {% endfor %}
+      </ul>
+    </div>
     <div class="panelists-container">
       <small><strong>Panelists</strong></small>
       <ul class="panelists">

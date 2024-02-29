@@ -4,6 +4,7 @@ from .models import Thesis
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
 from .forms import CommentForm, SearchForm
+from taggit.models import Tag
 # Create your views here.
 
 
@@ -11,8 +12,16 @@ def landing_page(request):
 
     return render(request, "searcher/landing-page/landing_page.html")
 
-def thesis_list(request):
+def thesis_list(request, thesis_slug=None):
     theses = Thesis.published.all()
+
+    tag = None
+
+    if thesis_slug:
+        tag = get_object_or_404(Tag, slug=thesis_slug)
+        theses = theses.filter(tags__in=[tag]) 
+        
+
     paginator = Paginator(theses, 3)
     page_number = request.GET.get("page", 1)
     theses = paginator.page(page_number)
@@ -34,7 +43,7 @@ def thesis_detail(request, year, month, day, post):
     authors = thesis.authors.all()
     panelists = thesis.panelists.all()
     keywords = thesis.keywords.all()
-    
+    tags = thesis.tags.all()    
     comments = thesis.comments.filter(active=True)
     form = CommentForm()
     context = {
@@ -43,7 +52,8 @@ def thesis_detail(request, year, month, day, post):
         "panelists": panelists,
         "keywords": keywords,
         "form": form,
-        "comments": comments
+        "comments": comments,
+        "tags": tags
     }
 
     return render(request, "searcher/thesis/detail.html", context)
@@ -77,3 +87,4 @@ def search_theses(request):
         "form": form
     }
     return render(request, "searcher/thesis/search.html", context)
+

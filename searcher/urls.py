@@ -5,6 +5,7 @@ app_name = "thesis"
 
 urlpatterns = [
     path("", views.thesis_list, name="thesis_list"),
+    path("tag/<slug:thesis_slug>/", views.thesis_list, name="thesis_list_by_tag"),
     path(
         "<int:year>/<int:month>/<int:day>/<slug:post>",
         views.thesis_detail,
