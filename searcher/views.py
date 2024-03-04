@@ -9,7 +9,6 @@ from taggit.models import Tag
 
 
 def landing_page(request):
-
     return render(request, "searcher/landing-page/landing_page.html")
 
 def thesis_list(request, thesis_slug=None):
