@@ -13,6 +13,7 @@ def landing_page(request):
 
 def thesis_list(request):
     theses = Thesis.published.all()
+    
     paginator = Paginator(theses, 3)
     page_number = request.GET.get("page", 1)
     theses = paginator.page(page_number)

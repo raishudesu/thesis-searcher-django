@@ -10,5 +10,5 @@ class CommentForm(ModelForm):
 class SearchForm(ModelForm):
     class Meta:
         model = Thesis
-        fields = ['abstract']
+        fields = ['abstract']   
         widgets = {'abstract': forms.TextInput(attrs={'size': 40}),}
