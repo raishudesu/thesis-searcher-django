@@ -6,7 +6,7 @@ body {
 
 main {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   padding: 2rem;
 }
@@ -32,16 +32,6 @@ h3 {
   border-radius: 2rem;
 }
 
-.theses-list {
-  padding: 1rem;
-  border-radius: 2rem;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-}
-
 ul {
   padding: 0;
 }
@@ -52,15 +42,15 @@ li {
 }
 
 .hero {
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 1rem;
   height: 25rem;
   width: 100%;
   /* max-width: 70%; */
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  /* background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
   border-radius: 2rem;
 }
 
@@ -89,4 +79,45 @@ li {
 .institution {
   display: flex;
   gap: 1rem;
+}
+
+.theses-list {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 2rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  /* background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.thesis-item {
+  padding: 1rem;
+  text-decoration: none;
+  max-width: 50%;
+  background-color: azure;
+  border-radius: 0.5rem;
+}
+
+.thesis-item:hover {
+  background-color: gray;
+  color: whitesmoke;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background-color: azure;
+  border-radius: 1rem;
+}
+.info {
+  margin-top: -1rem;
+}
+
+.comment:hover {
+  background-color: gray;
 }

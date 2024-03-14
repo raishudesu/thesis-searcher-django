@@ -9,7 +9,7 @@
 <h3>Showing available theses</h3>
 <ul class="theses-list">
   {%for thesis in theses%}
-  <li>
+  <li class="thesis-item">
     <a href="{{thesis.get_absolute_url}}">{{thesis.title}}</a>
     <small>{{thesis.get_status_display}}</small>
     <small>{{thesis.published_date}}</small>
