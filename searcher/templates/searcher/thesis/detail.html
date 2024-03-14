@@ -12,6 +12,7 @@
     <small><strong>Status: </strong>{{thesis.get_status_display}}</small>
     <small><strong>Adviser:</strong> {{thesis.adviser}}</small>
   </div>
+  <hr style="width: 100%" />
   <div class="hero-bottom">
     <div class="authors-container">
       <small><strong>Authors</strong></small>
@@ -54,6 +55,7 @@
       >
     </div>
   </div>
+  <hr style="width: 100%" />
 </section>
 
 <section class="abstract">
@@ -68,10 +70,14 @@
   <h2>{{ total_comments }} comment{{ total_comments|pluralize}}</h2>
   {% endwith %} {% for comment in comments %}
   <div class="comment">
-    <p class="info">
-      Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created }}
-    </p>
     {{ comment.body|linebreaks}}
+    <p class="info">
+      <small>
+        by {{ comment.name }}
+        <!--  -->
+        {{ comment.created}}
+      </small>
+    </p>
   </div>
   {% empty %}
   <p>There are no comments.</p>
